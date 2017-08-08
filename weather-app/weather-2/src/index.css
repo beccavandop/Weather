@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,200i,300,300i,400,400i,600,700,800,900');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(to top,  #74A4BC 0%,#74A4BC 50%, #F2F2F2 50%,#F2F2F2 100%);
+  height: 875px;
+  margin: auto;
+  text-align: center;
+}
+
+.logo-div {
+  width: 400px;
+  margin: auto;
+  margin-top: 20px;
+   transition: all 0.5s ease;
+  -webkit-animation: pulsate 2s ease-in;
+  -webkit-animation-iteration-count: infinite; 
+   -webkit-transition: width 2s;
+}
+  /* @-webkit-keyframes pulsate {
+    
+  
+    100% {-webkit-transform: scale(1.1, 1.1);;}
+} */
+
+.logo-div:hover {
+  width: 420px;
+}
+
+h1{
+  text-align: center;
+  font-family: 'Raleway';
+  font-weight: 200;
+  letter-spacing: 30px;
+  font-size: 4rem;
+  margin: 0;
+  margin-bottom: 1.6%;
+  margin-top: 1%;
+}
+
+h2 {
+  margin-top: 30px;
+    font-family: 'Raleway';
+  font-weight: 200;
+  letter-spacing: 10px;
+  line-height: 1.6;
+  font-size: 20px;
+ 
+}
+.home-page{
+  width: 630px;
+  margin:auto;
+}
+
+h2 .em {
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+form button {
+  width: 60px;
+  height: 40px;
+  vertical-align: top;
+  color: white;
+  font-size: 14px;
+  background-color: #B7DED3;
+}
+form button:hover {
+  background-color: #93CDBD;
+}
+form input {
+  font-size: 30px;
+  width: 190px;
+  height: 40px;
+  box-sizing: border-box;
+  font-family: 'Raleway';
+  font-weight: 200;
+}
+
+div.weather-input {
+
+  width: 500px;
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  margin-top: 6%;
+-webkit-box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.53);
+-moz-box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.53);
+box-shadow: 0px 0px 39px -3px rgba(0,0,0,0.53);
+
+}
+
+.weather-input .left {
+  text-align: left;
+  text-transform: uppercase;
+ 
+}
+
+.weather-input .right {
+  text-align: right;
+  
+}
+
+.right p, .left p {
+  width: 50%;
+  float: left;
+   padding: 0;
+  margin: 0;
+  font-family: 'Raleway';
+  font-weight: 300;
+}
+
+.day {
+  font-family: 'Raleway';
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 33px;
+  padding: 0;
+  margin: 0;
+}
+
+.weather-input div.icon img {
+  width: 100px;
+}
+
+.temp {
+  font-family: 'Raleway';
+  font-weight: 100;
+   font-size: 83px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 35px;
+
+}
+
+.weather-input p.precip {
+  text-align: left;
+  margin: 0;
+  padding:3px;
+   font-family: 'Raleway';
+  font-weight: 200;
+}
+form input, button {
+border-radius: 7px;
+border: none;
+
+}
+
+form input:focus {
+  border: 3px solid #74A4BC;
+  outline:none;
+}
+form label {
+ 
+     font-family: 'Raleway';
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  display: block;
+  padding-bottom: 4px;
+ 
+}
