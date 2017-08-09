@@ -7,9 +7,9 @@ class Chart extends Component {
     let maxTempData = []
     let labelData = []
     let rainData = []
-    let barColor = 'rgba(255, 99, 132, 0.8)'
+    let barColor = '#E63946'
     let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
-    let barColor2 = 'rgba(157, 192, 249, 0.8)'
+    let barColor2 = '#5CA4A9'
     let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
     let chartDatum = {}
     console.log(this.props.data)
