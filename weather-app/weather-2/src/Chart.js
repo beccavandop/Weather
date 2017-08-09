@@ -3,6 +3,28 @@ import { Bar } from 'react-chartjs-2';
 import './App.css';
 
 class Chart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      minTemp: 0
+    }
+    this.getData = this.getData.bind(this);
+  }
+  componentWillMount() {
+    this.getData()
+  }
+  componentWillReceiveProps() {
+    this.getData()
+  }
+
+  // findMin() {
+  //   let newMin = Math.min(this.state.data.datasets[0].data)
+  //   this.setState({
+  //     minTemp: newMin
+  //   })
+  // }
+
   getData() {
     let maxTempData = []
     let labelData = []
@@ -11,33 +33,40 @@ class Chart extends Component {
     let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
     let barColor2 = '#5CA4A9'
     let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
-    let chartDatum = {}
-    console.log(this.props.data)
     for (var i = 0; i < this.props.data.length; i++) {
       maxTempData.push(this.props.data[i].tempMax)
       labelData.push(this.props.data[i].date)
       rainData.push(this.props.data[i].precipChance)
     }
-    return chartDatum = {
-      'labels': labelData,
-      'datasets': [{
-        'label': 'Temperature (C)',
-        'yAxisID': 'A',
-        'data': maxTempData,
-        'backgroundColor': barColorArray1
-      }, {
-        'label': 'Rain Chance',
-        'yAxisID': 'B',
-        'data': rainData,
-        'backgroundColor': barColorArray2
-      },]
-    }
+    // console.log(maxTempData)
+    let newMin = Math.min(...maxTempData)
+    console.log(newMin)
+    this.setState({
+      data: {
+        'labels': labelData,
+        'datasets': [{
+          'label': 'Temperature (C)',
+          'yAxisID': 'A',
+          'data': maxTempData,
+          'backgroundColor': barColorArray1
+        }, {
+          'label': 'Rain Chance',
+          'yAxisID': 'B',
+          'data': rainData,
+          'backgroundColor': barColorArray2
+        },]
+      },
+      minTemp: newMin
+    })
+  // this.setState({
+  //   minTemp:
+  // })
   }
 
   render() {
     return (
       <div className='chart'>
-      <Bar data={this.getData()} options={{
+      <Bar data={this.state.data} options={{
         maintainAspectRatio: false,
         scales: {
           yAxes: [{
@@ -45,7 +74,7 @@ class Chart extends Component {
             type: 'linear',
             position: 'left',
             ticks: {
-              suggestedMinmin: 25,
+              suggestedMin: this.state.minTemp - 2,
               maxTicksLimit: 10
             }
           }, {
