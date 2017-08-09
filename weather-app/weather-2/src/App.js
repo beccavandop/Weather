@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import Input from './Input';
-import {Link} from 'react-router';
 import Homepage from './Homepage';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,11 +37,11 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault(); //prevents page from reloading
-    console.log('You typed: ' + this.state.text); //console.log to test
-    
+    // console.log('You typed: ' + this.state.text); //console.log to test
+
     axios.post('http://localhost:8080/', this.state)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({
           changeComp: true,
           currently: {
@@ -101,14 +99,12 @@ class App extends React.Component {
           ]
 
         })
-        
-        console.log(this.state);
       })
   }
 
-  
+
   render() {
-     
+
 
     return (
       <div>
@@ -123,20 +119,21 @@ class App extends React.Component {
         </div>
       </form>
        {this.state.changeComp ?
-           <Input city={this.state.currently.city}
-                  date={this.state.currently.date}
-                  temp={this.state.currently.currentTemp}
-                  icon={this.state.currently.icon}
-                  precipChance={this.state.currently.precipChance}
-                  precipIntense={this.state.currently.precipIntense}
-                  uvIndex={this.state.currently.uvIndex}/>
-           :
-           <Homepage />
-        }
-              {/* {React.cloneElement(this.props.children, {
+        <Input data={this.state.daily}
+        city={this.state.currently.city}
+        date={this.state.currently.date}
+        temp={this.state.currently.currentTemp}
+        icon={this.state.currently.icon}
+        precipChance={this.state.currently.precipChance}
+        precipIntense={this.state.currently.precipIntense}
+        uvIndex={this.state.currently.uvIndex}/>
+        :
+        <Homepage />
+      }
+              { /* {React.cloneElement(this.props.children, {
         currently: this.state.currently,
         daily: this.state.daily
-      })} */}
+      })} */ }
           </div>
       );
   }

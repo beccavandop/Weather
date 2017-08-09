@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Chart from './Chart.js'
 
-class Input extends React.Component {
+class Input extends Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="weather-input">
         <span className="left"><p>{this.props.city}</p></span> <span className="right"><p> {this.props.date}</p></span>
@@ -16,6 +16,7 @@ class Input extends React.Component {
         <p className="precip">Chance of precipitation: <b>{this.props.precipChance}</b></p>
         <p className="precip">Precipitation Intensity:<b> {this.props.precipIntense}</b></p>
         <p className="precip">UV Index: <b>{this.props.uvIndex}</b></p>
+        <Chart data={this.props.data} />
       </div>
       );
   }
