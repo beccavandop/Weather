@@ -6,10 +6,13 @@ class BadGate extends Component {
     return (
       <div>
         <div className="home-page">
-      <h2> TRY AGAIN DUMBASS </h2>
+          <div className="sun">
+          <img src="sun.svg" alt="Smiley face"/>
+          </div>
+      <h3 className="badgate"> TRY A DIFFERENT CITY </h3>
       </div>
-      <div className="logo-div">
-        <img src="sunandclouds.svg" alt="Smiley face"/>
+      <div className="city-div">
+        <img src="city-skyline.svg" alt="Smiley face"/>
       </div>
       </div>
     )
