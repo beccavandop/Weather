@@ -40,49 +40,11 @@ class App extends Component {
   toCelsius(f) {
     return Math.floor((5 / 9) * (f - 32));
   }
-  //
-  // getData() {
-  //   let maxTempData = []
-  //   let labelData = []
-  //   let rainData = []
-  //   let barColor = 'rgba(255, 99, 132, 0.8)'
-  //   let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
-  //   let barColor2 = 'rgba(157, 192, 249, 0.8)'
-  //   let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
-  //   for (var i = 0; i < this.state.daily.length; i++) {
-  //     maxTempData.push(this.state.daily[i].tempMax)
-  //     labelData.push(this.state.daily[i].date)
-  //     rainData.push(this.state.daily[i].precipChance)
-  //   }
-  //   // console.log(maxTempData)
-  //   let newMin = Math.min(...maxTempData)
-  //   let newMax = Math.max(...maxTempData)
-  //   this.setState({
-  //     data: {
-  //       'labels': labelData,
-  //       'datasets': [{
-  //         'label': 'Temperature (C)',
-  //         'yAxisID': 'A',
-  //         'data': maxTempData,
-  //         'backgroundColor': barColorArray1
-  //       }, {
-  //         'label': 'Rain Chance',
-  //         'yAxisID': 'B',
-  //         'data': rainData,
-  //         'backgroundColor': barColorArray2
-  //       },]
-  //     },
-  //     minTemp: newMin,
-  //     maxTemp: newMax
-  //   });
-  //   console.log(this.state)
-  // }
+
   handleSubmit(event) {
     event.preventDefault(); //prevents page from reloading
-    // console.log('You typed: ' + this.state.text); //console.log to test
-
     axios.post('http://localhost:8080/', {
-      text: this.state.text
+      text: this.state.text // Sends current text state (the city typed in) as the body for the post request
     })
       .then(res => {
         let maxTempData = []
@@ -176,7 +138,8 @@ class App extends Component {
       .catch(error => {
         console.log('error catch: ' + error)
         this.setState({
-          changeComp: 3
+          changeComp: 3,
+          text: ''
         })
       })
   }
