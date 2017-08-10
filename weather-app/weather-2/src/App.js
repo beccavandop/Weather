@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import Input from './Input';
 import Homepage from './Homepage';
+import BadGate from './badgate';
 
 class App extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class App extends Component {
       text: '',
       currently: {},
       daily: [],
-      changeComp: false,
+      changeComp: 2,
       data: {},
       minTemp: 0,
       maxTemp: 0
@@ -100,7 +101,7 @@ class App extends Component {
         let newMax = Math.max(...maxTempData)
         this.setState({
           text: '',
-          changeComp: true,
+          changeComp: 1,
           currently: {
             city: this.state.text,
             currentTemp: this.toCelsius(res.data.currently.temperature),
@@ -169,11 +170,15 @@ class App extends Component {
             },]
           },
           minTemp: newMin,
-          maxTemp: newMax
-
+          maxTemp: newMax,
         })
       })
-  // this.getData()
+      .catch(error => {
+        console.log('error catch: ' + error)
+        this.setState({
+          changeComp: 3
+        })
+      })
   }
 
   render() {
@@ -189,20 +194,18 @@ class App extends Component {
           </span>
         </div>
       </form>
-       {this.state.changeComp ?
-        <Input data={this.state.data}
-        minTemp={this.state.minTemp}
-        maxTemp={this.state.maxTemp}
-        city={this.state.currently.city}
-        date={this.state.currently.date}
-        temp={this.state.currently.currentTemp}
-        icon={this.state.currently.icon}
-        precipChance={this.state.currently.precipChance}
-        precipIntense={this.state.currently.precipIntense}
-        uvIndex={this.state.currently.uvIndex}/>
-        :
-        <Homepage />
-      }
+      {this.state.changeComp === 1 ? <Input data={this.state.data}
+      minTemp={this.state.minTemp}
+      maxTemp={this.state.maxTemp}
+      city={this.state.currently.city}
+      date={this.state.currently.date}
+      temp={this.state.currently.currentTemp}
+      icon={this.state.currently.icon}
+      precipChance={this.state.currently.precipChance}
+      precipIntense={this.state.currently.precipIntense}
+      uvIndex={this.state.currently.uvIndex}/> : <div></div>}
+       {this.state.changeComp === 2 ? <Homepage /> : <div></div>}
+       {this.state.changeComp === 3 ? <BadGate /> : <div></div>}
               { /* {React.cloneElement(this.props.children, {
         currently: this.state.currently,
         daily: this.state.daily

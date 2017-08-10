@@ -36,6 +36,7 @@ app.post('/', function(req, res) {
       res.send(weather)
     })
     .catch(function(error) {
+      console.log('Error!' + error)
       res.send(error + 'Error from DarkSky')
 
 
