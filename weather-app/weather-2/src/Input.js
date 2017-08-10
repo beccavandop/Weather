@@ -15,7 +15,13 @@ class Input extends Component {
         <p className="precip">Chance of precipitation: <b>{this.props.precipChance}</b></p>
         <p className="precip">Precipitation Intensity:<b> {this.props.precipIntense}</b></p>
         <p className="precip">UV Index: <b>{this.props.uvIndex}</b></p>
+<<<<<<< HEAD
         <Chart data={this.props.data} minTemp={this.props.minTemp} maxTemp={this.props.maxTemp} />
+=======
+
+        <h3> Seven Day Forcast</h3>
+        <Chart data={this.props.data} />
+>>>>>>> 2a8da394e07ac8e4a55c22528c22cc410b75a939
       </div>
       );
   }

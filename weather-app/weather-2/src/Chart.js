@@ -53,6 +53,47 @@ class Chart extends Component {
   //   })
   // }
 
+<<<<<<< HEAD
+=======
+  getData() {
+    let maxTempData = []
+    let labelData = []
+    let rainData = []
+    let barColor = '#E63946'
+    let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
+    let barColor2 = '#5CA4A9'
+    let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
+    for (var i = 0; i < this.props.data.length; i++) {
+      maxTempData.push(this.props.data[i].tempMax)
+      labelData.push(this.props.data[i].date)
+      rainData.push(this.props.data[i].precipChance)
+    }
+    // console.log(maxTempData)
+    let newMin = Math.min(...maxTempData)
+    console.log(newMin)
+    this.setState({
+      data: {
+        'labels': labelData,
+        'datasets': [{
+          'label': 'Temperature (C)',
+          'yAxisID': 'A',
+          'data': maxTempData,
+          'backgroundColor': barColorArray1
+        }, {
+          'label': 'Rain Chance',
+          'yAxisID': 'B',
+          'data': rainData,
+          'backgroundColor': barColorArray2
+        },]
+      },
+      minTemp: newMin
+    })
+  // this.setState({
+  //   minTemp:
+  // })
+  }
+
+>>>>>>> 2a8da394e07ac8e4a55c22528c22cc410b75a939
   render() {
     console.log(this.props)
     return (
