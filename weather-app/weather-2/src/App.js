@@ -8,12 +8,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      text: '',
       currently: {},
       daily: [],
-      changeComp: false
+      changeComp: false,
+      data: {},
+      minTemp: 0,
+      maxTemp: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  // this.getData = this.getData.bind(this);
   }
 
   handleChange(event) {
@@ -34,15 +39,67 @@ class App extends Component {
   toCelsius(f) {
     return Math.floor((5 / 9) * (f - 32));
   }
-
+  //
+  // getData() {
+  //   let maxTempData = []
+  //   let labelData = []
+  //   let rainData = []
+  //   let barColor = 'rgba(255, 99, 132, 0.8)'
+  //   let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
+  //   let barColor2 = 'rgba(157, 192, 249, 0.8)'
+  //   let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
+  //   for (var i = 0; i < this.state.daily.length; i++) {
+  //     maxTempData.push(this.state.daily[i].tempMax)
+  //     labelData.push(this.state.daily[i].date)
+  //     rainData.push(this.state.daily[i].precipChance)
+  //   }
+  //   // console.log(maxTempData)
+  //   let newMin = Math.min(...maxTempData)
+  //   let newMax = Math.max(...maxTempData)
+  //   this.setState({
+  //     data: {
+  //       'labels': labelData,
+  //       'datasets': [{
+  //         'label': 'Temperature (C)',
+  //         'yAxisID': 'A',
+  //         'data': maxTempData,
+  //         'backgroundColor': barColorArray1
+  //       }, {
+  //         'label': 'Rain Chance',
+  //         'yAxisID': 'B',
+  //         'data': rainData,
+  //         'backgroundColor': barColorArray2
+  //       },]
+  //     },
+  //     minTemp: newMin,
+  //     maxTemp: newMax
+  //   });
+  //   console.log(this.state)
+  // }
   handleSubmit(event) {
     event.preventDefault(); //prevents page from reloading
     // console.log('You typed: ' + this.state.text); //console.log to test
 
-    axios.post('http://localhost:8080/', this.state)
+    axios.post('http://localhost:8080/', {
+      text: this.state.text
+    })
       .then(res => {
-        // console.log(res.data)
+        let maxTempData = []
+        let labelData = []
+        let rainData = []
+        let barColor = 'rgba(255, 99, 132, 0.8)'
+        let barColorArray1 = [barColor, barColor, barColor, barColor, barColor, barColor, barColor]
+        let barColor2 = 'rgba(157, 192, 249, 0.8)'
+        let barColorArray2 = [barColor2, barColor2, barColor2, barColor2, barColor2, barColor2, barColor2]
+        for (var i = 1; i < res.data.daily.data.length; i++) {
+          maxTempData.push(this.toCelsius(res.data.daily.data[i].temperatureMax))
+          labelData.push(this.timeConverter(res.data.daily.data[i].time))
+          rainData.push(res.data.daily.data[i].precipProbability)
+        }
+        let newMin = Math.min(...maxTempData)
+        let newMax = Math.max(...maxTempData)
         this.setState({
+          text: '',
           changeComp: true,
           currently: {
             city: this.state.text,
@@ -96,16 +153,30 @@ class App extends Component {
               tempMax: this.toCelsius(res.data.daily.data[7].temperatureMax),
               precipChance: res.data.daily.data[7].precipProbability
             }
-          ]
+          ],
+          data: {
+            'labels': labelData,
+            'datasets': [{
+              'label': 'Temperature (C)',
+              'yAxisID': 'A',
+              'data': maxTempData,
+              'backgroundColor': barColorArray1
+            }, {
+              'label': 'Rain Chance',
+              'yAxisID': 'B',
+              'data': rainData,
+              'backgroundColor': barColorArray2
+            },]
+          },
+          minTemp: newMin,
+          maxTemp: newMax
 
         })
       })
+  // this.getData()
   }
 
-
   render() {
-
-
     return (
       <div>
       <h1>Weather App</h1>
@@ -119,7 +190,9 @@ class App extends Component {
         </div>
       </form>
        {this.state.changeComp ?
-        <Input data={this.state.daily}
+        <Input data={this.state.data}
+        minTemp={this.state.minTemp}
+        maxTemp={this.state.maxTemp}
         city={this.state.currently.city}
         date={this.state.currently.date}
         temp={this.state.currently.currentTemp}

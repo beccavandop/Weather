@@ -4,7 +4,6 @@ import Chart from './Chart.js'
 
 class Input extends Component {
   render() {
-    // console.log(this.props);
     return (
       <div className="weather-input">
         <span className="left"><p>{this.props.city}</p></span> <span className="right"><p> {this.props.date}</p></span>
@@ -16,7 +15,7 @@ class Input extends Component {
         <p className="precip">Chance of precipitation: <b>{this.props.precipChance}</b></p>
         <p className="precip">Precipitation Intensity:<b> {this.props.precipIntense}</b></p>
         <p className="precip">UV Index: <b>{this.props.uvIndex}</b></p>
-        <Chart data={this.props.data} />
+        <Chart data={this.props.data} minTemp={this.props.minTemp} maxTemp={this.props.maxTemp} />
       </div>
       );
   }
