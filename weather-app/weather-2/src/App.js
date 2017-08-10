@@ -11,7 +11,6 @@ class App extends Component {
     this.state = {
       text: '',
       currently: {},
-      daily: [],
       changeComp: 2,
       data: {},
       minTemp: 0,
@@ -19,7 +18,6 @@ class App extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  // this.getData = this.getData.bind(this);
   }
 
   handleChange(event) {
@@ -73,50 +71,6 @@ class App extends Component {
             uvIndex: res.data.currently.uvIndex,
             icon: res.data.currently.icon
           },
-          daily: [
-            {
-              date: this.timeConverter(res.data.daily.data[1].time),
-              icon: res.data.daily.data[1].icon,
-              tempMax: this.toCelsius(res.data.daily.data[1].temperatureMax),
-              precipChance: res.data.daily.data[1].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[2].time),
-              icon: res.data.daily.data[2].icon,
-              tempMax: this.toCelsius(res.data.daily.data[2].temperatureMax),
-              precipChance: res.data.daily.data[2].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[3].time),
-              icon: res.data.daily.data[3].icon,
-              tempMax: this.toCelsius(res.data.daily.data[3].temperatureMax),
-              precipChance: res.data.daily.data[3].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[4].time),
-              icon: res.data.daily.data[4].icon,
-              tempMax: this.toCelsius(res.data.daily.data[4].temperatureMax),
-              precipChance: res.data.daily.data[4].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[5].time),
-              icon: res.data.daily.data[5].icon,
-              tempMax: this.toCelsius(res.data.daily.data[5].temperatureMax),
-              precipChance: res.data.daily.data[5].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[6].time),
-              icon: res.data.daily.data[6].icon,
-              tempMax: this.toCelsius(res.data.daily.data[6].temperatureMax),
-              precipChance: res.data.daily.data[6].precipProbability
-            },
-            {
-              date: this.timeConverter(res.data.daily.data[7].time),
-              icon: res.data.daily.data[7].icon,
-              tempMax: this.toCelsius(res.data.daily.data[7].temperatureMax),
-              precipChance: res.data.daily.data[7].precipProbability
-            }
-          ],
           data: {
             'labels': labelData,
             'datasets': [{
